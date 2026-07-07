@@ -1,0 +1,338 @@
+/* =============================================================
+   BC GREENHOUSE — COMPONENTES (reutilizables en todo el sitio)
+   ============================================================= */
+
+/* ---------- BOTONES ---------- */
+.btn {
+  --_bg: var(--color-primary);
+  --_fg: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 0.9em 1.6em;
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.01em;
+  color: var(--_fg);
+  background: var(--_bg);
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  transition: transform var(--dur-fast) var(--ease),
+              box-shadow var(--dur) var(--ease),
+              background var(--dur) var(--ease);
+  will-change: transform;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+.btn .icon { width: 1.1em; height: 1.1em; }
+
+.btn--primary { box-shadow: var(--shadow-red); }
+.btn--primary:hover { --_bg: var(--color-primary-hover); box-shadow: 0 14px 32px rgba(216,31,22,0.36); }
+
+.btn--accent { --_bg: var(--color-accent); box-shadow: 0 10px 24px rgba(76,158,55,0.28); }
+.btn--accent:hover { --_bg: var(--color-accent-hover); }
+
+.btn--ghost {
+  --_bg: transparent; --_fg: var(--color-text);
+  border-color: var(--color-border);
+}
+.btn--ghost:hover { border-color: var(--color-text); --_bg: transparent; }
+
+.btn--light {
+  --_bg: #fff; --_fg: var(--color-brand-deep);
+  box-shadow: var(--shadow-sm);
+}
+.btn--light:hover { --_bg: #fff; box-shadow: var(--shadow-md); }
+
+.btn--outline-light {
+  --_bg: transparent; --_fg: #fff;
+  border-color: rgba(255,255,255,0.4);
+}
+.btn--outline-light:hover { border-color: #fff; }
+
+/* Enlace con flecha (text link) */
+.link-arrow {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  font-weight: var(--fw-semibold); color: var(--color-primary);
+  font-size: var(--fs-sm);
+}
+.link-arrow svg { transition: transform var(--dur) var(--ease); }
+.link-arrow:hover svg { transform: translateX(4px); }
+
+/* ---------- BADGE / PILL ---------- */
+.badge {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  padding: 0.4em 0.9em;
+  font-size: var(--fs-caption); font-weight: var(--fw-semibold);
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-pill);
+  background: var(--c-green-50); color: var(--color-accent-hover);
+}
+.badge--red { background: var(--c-red-50); color: var(--color-primary-hover); }
+.badge--cream { background: rgba(255,255,255,0.14); color: #fff; }
+
+/* ---------- HEADER / NAV ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: var(--z-header);
+  background: rgba(255,255,255,0.86);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease),
+              background var(--dur) var(--ease);
+}
+.site-header.is-scrolled {
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--sp-5);
+  min-height: 76px;
+}
+.nav__logo { display: flex; align-items: center; gap: var(--sp-3); flex-shrink: 0; }
+.nav__logo img { height: 52px; width: auto; }
+
+.nav__menu {
+  display: flex; align-items: center; gap: var(--sp-2);
+  list-style: none;
+}
+.nav__link {
+  display: inline-block;
+  padding: var(--sp-2) var(--sp-3);
+  font-size: var(--fs-sm); font-weight: var(--fw-medium);
+  color: var(--color-text-soft);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.nav__link:hover { color: var(--color-text); background: var(--c-mist); }
+.nav__link.is-active { color: var(--color-primary); }
+
+/* Dropdown */
+.nav__item--has-menu { position: relative; }
+.nav__submenu {
+  position: absolute; top: 100%; left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  /* padding-top actúa como "puente" invisible: elimina el hueco entre el
+     link y el submenú para que el hover no se pierda al bajar el mouse. */
+  min-width: 240px;
+  padding: 12px var(--sp-2) var(--sp-2);
+  margin-top: -2px;
+  background: transparent; border: 0; box-shadow: none;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur);
+  list-style: none;
+}
+/* La "tarjeta" visible del submenú (para que el padding-top puente no se vea) */
+.nav__submenu::before {
+  content: ""; position: absolute; inset: 12px 0 0 0; z-index: -1;
+  background: #fff; border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+}
+.nav__item--has-menu:hover .nav__submenu,
+.nav__item--has-menu:focus-within .nav__submenu {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.nav__submenu a {
+  display: block; padding: var(--sp-3) var(--sp-4);
+  font-size: var(--fs-sm); font-weight: var(--fw-medium);
+  color: var(--color-text-soft); border-radius: var(--radius-sm);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.nav__submenu a:hover { background: var(--c-mist); color: var(--color-primary); }
+
+.nav__actions { display: flex; align-items: center; gap: var(--sp-3); flex-shrink: 0; }
+.nav__toggle { display: none; }
+.nav__mobile-cta { display: none; } /* solo visible dentro del menú móvil */
+
+/* Mobile nav */
+@media (max-width: 1000px) {
+  /* Con el menú abierto, el header (y su menú off-canvas) debe quedar
+     por encima de TODO el contenido de la página. La clase .nav-open la
+     añade el JS al header; evita problemas de stacking context sin
+     depender de :has() (no soportado en navegadores antiguos). */
+  .site-header.nav-open { z-index: var(--z-modal); }
+
+  .nav__menu, .nav__actions .btn { display: none; }
+  .nav__toggle {
+    display: inline-flex; flex-direction: column; gap: 5px;
+    padding: 10px; border-radius: var(--radius-sm);
+  }
+  .nav__toggle span {
+    width: 24px; height: 2px; background: var(--color-text);
+    border-radius: 2px; transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+  }
+  .nav.is-open .nav__toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav.is-open .nav__toggle span:nth-child(2) { opacity: 0; }
+  .nav.is-open .nav__toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav__menu {
+    position: fixed; top: 76px; right: 0; bottom: 0; left: 0;
+    z-index: var(--z-overlay); /* por encima del contenido de la página */
+    /* altura explícita: como item flex del .nav, top/bottom no bastan
+       para estirarlo → fijamos la altura del viewport menos el header. */
+    height: calc(100vh - 76px);
+    height: calc(100dvh - 76px);
+    flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0;
+    padding: var(--sp-5) var(--gutter);
+    background: #fff; overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform var(--dur) var(--ease), visibility var(--dur);
+    display: flex;
+    /* oculto y sin generar scroll horizontal cuando está cerrado */
+    visibility: hidden; pointer-events: none;
+  }
+  .nav.is-open .nav__menu { transform: translateX(0); visibility: visible; pointer-events: auto; }
+  .nav__link { padding: var(--sp-4) 0; border-bottom: 1px solid var(--color-border); font-size: var(--fs-lg); }
+  .nav__submenu {
+    position: static; opacity: 1; visibility: visible; pointer-events: auto;
+    transform: none; box-shadow: none; border: 0;
+    padding: 0 0 var(--sp-2) var(--sp-5);
+    margin: 0; min-width: 0; width: 100%; background: transparent;
+  }
+  /* en móvil el submenú es plano: quitamos la "tarjeta" flotante del desktop */
+  .nav__submenu::before { display: none; }
+  .nav__submenu a { padding: var(--sp-3) 0; border-bottom: 1px solid var(--color-border); font-size: var(--fs-base); }
+  .nav__submenu li:last-child a { border-bottom: 0; }
+
+  .nav__mobile-cta {
+    display: flex; flex-direction: column; gap: var(--sp-3);
+    padding-top: var(--sp-5); border-bottom: 0;
+  }
+  .nav__mobile-cta .btn { width: 100%; }
+}
+
+/* ---------- CARD ---------- */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  height: 100%;
+  display: flex; flex-direction: column;
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+.card__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--c-mist); }
+.card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease); }
+.card:hover .card__media img { transform: scale(1.05); }
+.card__body { padding: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-3); flex: 1; }
+.card__title { font-size: var(--fs-lg); font-weight: var(--fw-semibold); font-family: var(--font-display); }
+.card__meta { font-size: var(--fs-caption); color: var(--color-text-muted); font-weight: var(--fw-medium); letter-spacing: 0.02em; text-transform: uppercase; }
+.card__text { color: var(--color-text-soft); font-size: var(--fs-sm); }
+.card__foot { margin-top: auto; padding-top: var(--sp-2); }
+
+/* Card categoría con overlay (para producto/receta) */
+.tile {
+  position: relative; display: block; border-radius: var(--radius-lg);
+  overflow: hidden; aspect-ratio: 3 / 4; box-shadow: var(--shadow-sm);
+}
+.tile img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease); }
+.tile::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(6,63,57,0.15) 55%, rgba(6,63,57,0.82) 100%);
+}
+.tile:hover img { transform: scale(1.06); }
+.tile__label {
+  position: absolute; left: var(--sp-5); right: var(--sp-5); bottom: var(--sp-5);
+  z-index: 1; color: #fff;
+}
+.tile__label h3 { color: #fff; font-size: var(--fs-xl); }
+.tile__label p { color: rgba(255,255,255,0.85); font-size: var(--fs-sm); margin-top: var(--sp-1); }
+
+/* ---------- GRID ---------- */
+.grid { display: grid; gap: var(--sp-5); }
+/* Evita overflow por contenido ancho (imágenes, palabras largas) en cualquier grid. */
+.grid > * { min-width: 0; }
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) {
+  .grid--3, .grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
+}
+
+/* ---------- STAT ---------- */
+.stat__num {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 1.8rem + 3vw, 4rem);
+  font-weight: var(--fw-bold); line-height: 1;
+  color: var(--color-primary); letter-spacing: -0.03em;
+}
+.section--dark .stat__num { color: var(--c-green-500); }
+.stat__label { margin-top: var(--sp-2); font-size: var(--fs-sm); color: var(--color-text-soft); font-weight: var(--fw-medium); }
+.section--dark .stat__label { color: rgba(255,255,255,0.8); }
+
+/* ---------- FOOTER ---------- */
+.site-footer { background: var(--c-teal-900); color: rgba(255,255,255,0.78); padding-block: var(--sp-9) var(--sp-6); }
+.site-footer a { color: rgba(255,255,255,0.78); transition: color var(--dur-fast) var(--ease); }
+.site-footer a:hover { color: #fff; }
+.footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: var(--sp-6); }
+@media (max-width: 860px) { .footer__grid { grid-template-columns: 1fr 1fr; gap: var(--sp-6); } }
+@media (max-width: 480px) { .footer__grid { grid-template-columns: 1fr; } }
+/* Logo a color dentro de una pastilla blanca (el logo es rojo/verde y no
+   se ve sobre el footer oscuro; una pastilla clara lo hace resaltar bien). */
+.footer__brand .footer__logo {
+  display: inline-flex; padding: 12px 16px;
+  background: #fff; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+.footer__brand .footer__logo img { height: 52px; width: auto; display: block; }
+.footer__title { color: #fff; font-family: var(--font-sans); font-weight: var(--fw-bold); font-size: var(--fs-sm); letter-spacing: var(--ls-wide); text-transform: uppercase; margin-bottom: var(--sp-4); }
+.footer__list { list-style: none; display: flex; flex-direction: column; gap: var(--sp-3); font-size: var(--fs-sm); }
+.footer__bottom {
+  margin-top: var(--sp-8); padding-top: var(--sp-5);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-4);
+  font-size: var(--fs-caption); color: rgba(255,255,255,0.6);
+}
+.social { display: flex; gap: var(--sp-3); }
+.social a {
+  display: grid; place-items: center; width: 40px; height: 40px;
+  border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-pill);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.social a:hover { background: var(--color-accent); border-color: var(--color-accent); transform: translateY(-3px); }
+.social svg { width: 18px; height: 18px; }
+
+/* ---------- ANIMACIÓN REVEAL ---------- */
+[data-reveal] {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+}
+[data-reveal].is-visible { opacity: 1; transform: none; }
+[data-reveal-delay="1"] { transition-delay: 80ms; }
+[data-reveal-delay="2"] { transition-delay: 160ms; }
+[data-reveal-delay="3"] { transition-delay: 240ms; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; }
+}
+
+/* ---------- BOTÓN SCROLL TO TOP (sutil) ---------- */
+.to-top {
+  position: fixed; right: clamp(1rem, 2vw, 2rem); bottom: clamp(1rem, 2vw, 2rem);
+  z-index: var(--z-header);
+  width: 46px; height: 46px; display: grid; place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--color-brand-deep); color: #fff;
+  box-shadow: var(--shadow-md);
+  /* oculto por defecto: aparece al hacer scroll */
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease),
+              visibility var(--dur), background var(--dur-fast) var(--ease);
+}
+.to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.to-top:hover { background: var(--c-teal-900); transform: translateY(-3px); }
+.to-top svg { width: 20px; height: 20px; }
+@media (prefers-reduced-motion: reduce) {
+  .to-top { transition: opacity var(--dur) var(--ease), visibility var(--dur); transform: none; }
+  .to-top.is-visible { transform: none; }
+  .to-top:hover { transform: none; }
+}

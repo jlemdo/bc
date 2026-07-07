@@ -1,0 +1,10 @@
+# Dependencias (se regeneran con: npm install)
+node_modules/
+
+# Logs / temporales
+*.log
+.DS_Store
+Thumbs.db
+
+# Archivos temporales de debug SOLO en la raíz (no afecta partials/_header.html, etc.)
+/_*.html

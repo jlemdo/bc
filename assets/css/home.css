@@ -1,0 +1,167 @@
+/* =============================================================
+   BC GREENHOUSE — home.css  (secciones específicas de la Home)
+   ============================================================= */
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  padding-block: clamp(3rem, 2rem + 6vw, 6rem) clamp(3.5rem, 2rem + 7vw, 7rem);
+  background:
+    radial-gradient(70% 90% at 85% 0%, var(--c-green-50) 0%, transparent 55%),
+    radial-gradient(60% 80% at 0% 100%, var(--c-red-50) 0%, transparent 50%),
+    var(--color-bg);
+  overflow: hidden;
+}
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: clamp(2rem, 1rem + 4vw, 5rem);
+}
+@media (max-width: 900px) { .hero__grid { grid-template-columns: 1fr; gap: var(--sp-7); } }
+/* min-width:0 permite que los items de grid encojan bajo el ancho de su
+   contenido → sin esto, palabras largas fuerzan overflow horizontal. */
+.hero__grid > * { min-width: 0; }
+
+.hero__eyebrow { margin-bottom: var(--sp-4); }
+.hero h1 { margin-bottom: var(--sp-5); }
+.hero h1 em { font-style: italic; color: var(--color-primary); }
+.hero__lead { max-width: 34rem; margin-bottom: var(--sp-6); }
+.hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; }
+.hero__trust {
+  margin-top: var(--sp-7); display: flex; align-items: center; gap: var(--sp-5);
+  flex-wrap: wrap;
+}
+.hero__trust img { height: 46px; width: auto; }
+.hero__trust-text { font-size: var(--fs-sm); color: var(--color-text-muted); max-width: 16rem; }
+
+/* Media del hero: collage de fotos */
+.hero__media { position: relative; }
+.hero__media-main {
+  border-radius: var(--radius-xl); overflow: hidden;
+  aspect-ratio: 4 / 5; box-shadow: var(--shadow-lg);
+}
+.hero__media-main img { width: 100%; height: 100%; object-fit: cover; }
+.hero__badge-float {
+  position: absolute; left: -18px; bottom: 32px;
+  background: #fff; border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg); padding: var(--sp-4) var(--sp-5);
+  display: flex; align-items: center; gap: var(--sp-4); max-width: 260px;
+}
+.hero__badge-float .stat__num { font-size: clamp(2rem, 1.6rem + 1.5vw, 2.6rem); }
+.hero__badge-float p { font-size: var(--fs-caption); color: var(--color-text-soft); line-height: 1.35; }
+@media (max-width: 900px) { .hero__badge-float { left: 12px; } }
+@media (max-width: 420px) { .hero__badge-float { position: static; margin-top: var(--sp-4); max-width: none; } }
+
+.hero__leaf {
+  position: absolute; top: -30px; right: -20px; width: 120px; opacity: 0.9;
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-12px) rotate(2deg); } }
+
+/* ---------- MARQUEE de productos ---------- */
+.marquee { border-block: 1px solid var(--color-border); background: var(--color-bg); padding-block: var(--sp-4); overflow: hidden; }
+.marquee__track {
+  display: flex; width: max-content; flex-wrap: nowrap;
+  animation: scroll-x 32s linear infinite;
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+/* El espaciado va como padding-inline en cada item (no como gap del track),
+   así el patrón es perfectamente uniforme y el bucle no muestra saltos.
+   El track contiene 2 copias idénticas → translateX(-50%) reinicia sin cortes. */
+.marquee__item {
+  display: inline-flex; align-items: center; gap: var(--sp-3);
+  padding-inline: calc(var(--sp-7) / 2);
+  font-family: var(--font-display); font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold); color: var(--color-text-soft);
+  white-space: nowrap;
+}
+.marquee__item span { color: var(--color-accent); }
+@keyframes scroll-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; flex-wrap: wrap; } }
+
+/* ---------- STATS band ---------- */
+.stats-band .grid { gap: var(--sp-6); }
+.stats-band .stat { text-align: center; padding: var(--sp-5) var(--sp-3); }
+.stat-divider .stat { border-right: 1px solid rgba(255,255,255,0.12); }
+@media (max-width: 600px) { .stat-divider .stat { border-right: 0; } }
+
+/* ---------- SPLIT (imagen + texto) ---------- */
+.split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 1rem + 4vw, 5rem); }
+.split--reverse .split__media { order: 2; }
+@media (max-width: 860px) {
+  .split { grid-template-columns: 1fr; gap: var(--sp-6); }
+  .split--reverse .split__media { order: 0; }
+}
+.split__media { position: relative; border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 5 / 4; box-shadow: var(--shadow-md); }
+.split__media img { width: 100%; height: 100%; object-fit: cover; }
+.split__list { display: flex; flex-direction: column; gap: var(--sp-4); margin-top: var(--sp-5); }
+.split__list li { display: flex; gap: var(--sp-3); align-items: flex-start; }
+.split__list .check {
+  flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+  background: var(--c-green-100); color: var(--color-accent-hover);
+  display: grid; place-items: center; margin-top: 2px;
+}
+.split__list .check svg { width: 15px; height: 15px; }
+.split__list strong { display: block; font-weight: var(--fw-semibold); }
+.split__list span { color: var(--color-text-soft); font-size: var(--fs-sm); }
+
+/* ---------- CTA band ---------- */
+.cta-band {
+  background:
+    linear-gradient(120deg, var(--c-teal-700), var(--c-teal-900));
+  border-radius: var(--radius-xl);
+  padding: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+  color: #fff; text-align: center; position: relative; overflow: hidden;
+}
+.cta-band h2 { color: #fff; max-width: 22ch; margin-inline: auto; }
+.cta-band p { color: rgba(255,255,255,0.85); max-width: 46ch; margin: var(--sp-4) auto var(--sp-6); font-size: var(--fs-lg); }
+.cta-band__actions { display: flex; gap: var(--sp-3); justify-content: center; flex-wrap: wrap; }
+
+/* ---------- Instagram / social ---------- */
+.ig-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-3); }
+@media (max-width: 700px) { .ig-grid { grid-template-columns: repeat(2, 1fr); } }
+.ig-tile { position: relative; aspect-ratio: 1; border-radius: var(--radius-md); overflow: hidden; }
+.ig-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease); }
+.ig-tile::after {
+  content: ""; position: absolute; inset: 0;
+  background: rgba(6,63,57,0); transition: background var(--dur) var(--ease);
+}
+.ig-tile:hover img { transform: scale(1.08); }
+.ig-tile:hover::after { background: rgba(6,63,57,0.25); }
+
+/* News feature layout */
+.news-feature { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--sp-6); align-items: stretch; }
+@media (max-width: 860px) { .news-feature { grid-template-columns: 1fr; } }
+.news-list { display: flex; flex-direction: column; gap: var(--sp-4); }
+.news-item {
+  display: grid; grid-template-columns: auto 1fr; gap: var(--sp-4);
+  padding: var(--sp-4); border-radius: var(--radius-md);
+  transition: background var(--dur) var(--ease);
+}
+.news-item:hover { background: var(--c-mist); }
+.news-item time {
+  font-family: var(--font-display); font-weight: var(--fw-bold);
+  color: var(--color-primary); text-align: center; line-height: 1; min-width: 54px;
+}
+.news-item time .d { font-size: 1.6rem; display: block; }
+.news-item time .m { font-size: var(--fs-caption); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); }
+.news-item h4 { font-size: var(--fs-base); font-weight: var(--fw-semibold); }
+.news-item p { font-size: var(--fs-sm); color: var(--color-text-soft); margin-top: 2px; }
+
+/* ---------- Ajustes móvil (≤ 480px) ---------- */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: clamp(1.85rem, 7vw, 2.35rem);
+    overflow-wrap: anywhere;   /* parte cualquier palabra antes que desbordar */
+    text-wrap: balance;
+  }
+  .hero__actions { width: 100%; }
+  .hero__actions .btn { flex: 1 1 auto; justify-content: center; }
+  .hero__trust { gap: var(--sp-4); }
+  .cta-band__actions .btn,
+  .news-list .btn { width: 100%; }
+}

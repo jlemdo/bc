@@ -1,0 +1,132 @@
+/* =============================================================
+   BC GREENHOUSE — page.css  (secciones de páginas internas)
+   Reutiliza tokens + components. Sólo añade patrones propios
+   de páginas de contenido (page-header, prose, breadcrumb, etc.)
+   ============================================================= */
+
+/* ---------- PAGE HEADER (hero interno) ---------- */
+.page-header {
+  position: relative;
+  padding-block: clamp(3rem, 2rem + 5vw, 5.5rem);
+  background:
+    radial-gradient(80% 120% at 90% -10%, var(--c-green-50) 0%, transparent 55%),
+    radial-gradient(70% 110% at -10% 110%, var(--c-red-50) 0%, transparent 50%),
+    var(--color-bg);
+  overflow: hidden;
+}
+.page-header__inner { max-width: 52rem; }
+.page-header h1 { margin-block: var(--sp-4) var(--sp-4); }
+.page-header p { font-size: var(--fs-lg); color: var(--color-text-soft); max-width: 44rem; }
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2);
+  font-size: var(--fs-caption); color: var(--color-text-muted);
+  font-weight: var(--fw-medium);
+}
+.breadcrumb a { color: var(--color-text-muted); transition: color var(--dur-fast) var(--ease); }
+.breadcrumb a:hover { color: var(--color-primary); }
+.breadcrumb .sep { opacity: 0.5; }
+.breadcrumb [aria-current] { color: var(--color-text); }
+
+/* ---------- PROSE (bloques de texto largos) ---------- */
+.prose { max-width: var(--container-text); }
+.prose > * + * { margin-top: var(--sp-4); }
+.prose h2 { margin-top: var(--sp-7); font-size: var(--fs-h3); }
+.prose h3 { margin-top: var(--sp-6); font-size: var(--fs-xl); }
+.prose p { color: var(--color-text-soft); }
+.prose a:not(.btn) { color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+.prose a:not(.btn):hover { color: var(--color-primary-hover); }
+.prose ul { padding-left: 1.25rem; color: var(--color-text-soft); }
+.prose li { margin-top: var(--sp-2); }
+
+/* Pull-quote / dato destacado */
+.pull {
+  border-left: 4px solid var(--color-accent);
+  padding: var(--sp-4) 0 var(--sp-4) var(--sp-5);
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-medium);
+  line-height: 1.3;
+  color: var(--color-text);
+  margin-block: var(--sp-6);
+}
+.pull strong { color: var(--color-primary); }
+
+/* ---------- TWO-COLUMN CONTENT (texto + aside sticky) ---------- */
+.doc-grid { display: grid; grid-template-columns: 1fr 300px; gap: clamp(2rem, 1rem + 4vw, 5rem); align-items: start; }
+@media (max-width: 900px) { .doc-grid { grid-template-columns: 1fr; } }
+.doc-aside { position: sticky; top: 100px; }
+@media (max-width: 900px) { .doc-aside { position: static; } }
+.aside-card {
+  border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  padding: var(--sp-5); background: var(--color-surface);
+}
+.aside-card h4 { font-size: var(--fs-base); font-family: var(--font-sans); font-weight: var(--fw-bold); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--sp-4); }
+.aside-list { list-style: none; display: flex; flex-direction: column; gap: var(--sp-3); }
+.aside-list a { display: flex; justify-content: space-between; align-items: center; gap: var(--sp-2); font-size: var(--fs-sm); font-weight: var(--fw-medium); color: var(--color-text-soft); padding: var(--sp-2) 0; border-bottom: 1px solid var(--color-border); transition: color var(--dur-fast) var(--ease); }
+.aside-list a:last-child { border-bottom: 0; }
+.aside-list a:hover { color: var(--color-primary); }
+
+/* ---------- FEATURE ROW (icono + texto) ---------- */
+.feature { display: flex; gap: var(--sp-4); align-items: flex-start; }
+.feature__icon {
+  flex-shrink: 0; width: 52px; height: 52px; border-radius: var(--radius-md);
+  display: grid; place-items: center;
+  background: var(--c-green-50); color: var(--color-accent-hover);
+}
+.feature__icon svg { width: 26px; height: 26px; }
+.feature h3 { font-size: var(--fs-lg); font-family: var(--font-display); }
+.feature p { font-size: var(--fs-sm); color: var(--color-text-soft); margin-top: var(--sp-2); }
+
+/* ---------- CONTACT ---------- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 1rem + 4vw, 4rem); align-items: start; }
+@media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+.contact-card {
+  border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); background: var(--color-surface);
+}
+.field { display: flex; flex-direction: column; gap: var(--sp-2); margin-bottom: var(--sp-4); }
+.field label { font-size: var(--fs-sm); font-weight: var(--fw-semibold); }
+.field input, .field textarea {
+  width: 100%; padding: 0.85em 1em; font-size: var(--fs-base);
+  border: 1.5px solid var(--color-border); border-radius: var(--radius-sm);
+  background: var(--color-bg); transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--c-green-100); }
+.field textarea { resize: vertical; min-height: 130px; }
+.contact-info { display: flex; flex-direction: column; gap: var(--sp-5); }
+.contact-line { display: flex; gap: var(--sp-4); align-items: flex-start; }
+.contact-line .ci {
+  flex-shrink: 0; width: 46px; height: 46px; border-radius: var(--radius-md);
+  display: grid; place-items: center; background: var(--c-red-50); color: var(--color-primary);
+}
+.contact-line .ci svg { width: 22px; height: 22px; }
+.contact-line strong { display: block; font-weight: var(--fw-semibold); }
+.contact-line a, .contact-line span { color: var(--color-text-soft); font-size: var(--fs-sm); }
+.map-embed { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 16/10; border: 1px solid var(--color-border); background: var(--c-mist); }
+.map-embed iframe { width: 100%; height: 100%; border: 0; }
+
+/* ---------- RETAILERS / FIND PRODUCT ---------- */
+.retailer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--sp-4); }
+.retailer {
+  display: grid; place-items: center; padding: var(--sp-5);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  background: var(--color-surface); min-height: 110px;
+  font-family: var(--font-display); font-weight: var(--fw-semibold); color: var(--color-text-soft);
+  text-align: center; transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.retailer:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+
+/* ---------- NEWS LIST (page) ---------- */
+.post-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); }
+@media (max-width: 760px) { .post-grid { grid-template-columns: 1fr; } }
+.pagination { display: flex; gap: var(--sp-2); justify-content: center; margin-top: var(--sp-8); }
+.pagination a, .pagination span {
+  min-width: 42px; height: 42px; display: grid; place-items: center;
+  border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+  font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--color-text-soft);
+  transition: all var(--dur-fast) var(--ease);
+}
+.pagination a:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.pagination [aria-current] { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }

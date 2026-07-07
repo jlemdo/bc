@@ -1,0 +1,140 @@
+/* =============================================================
+   BC GREENHOUSE — DESIGN TOKENS
+   Fuente única de verdad del sistema visual.
+   Todo el sitio referencia estas variables → al portar a
+   WordPress (Gutenberg / Elementor / Astra) sólo se mapean
+   estos tokens a los "Global Styles" del tema.
+   ============================================================= */
+
+:root {
+  /* ---------- COLOR: MARCA (refinada desde la paleta original) ----------
+     Original detectado: rojo #ee2e24 · verde #60bb46 · teal #0f877b
+     Refinamos tonos y añadimos escalas para contraste WCAG AA. */
+
+  /* Rojo tomate — acento primario / CTAs */
+  --c-red-50:  #fef2f1;
+  --c-red-100: #fddedb;
+  --c-red-500: #ee2e24;   /* marca original */
+  --c-red-600: #d81f16;   /* hover, texto sobre claro (AA) */
+  --c-red-700: #b31810;
+
+  /* Verde hoja — naturaleza / frescura */
+  --c-green-50:  #f1f9ed;
+  --c-green-100: #dcf0d2;
+  --c-green-500: #60bb46;  /* marca original */
+  --c-green-600: #4c9e37;  /* AA sobre blanco */
+  --c-green-700: #3a7a2a;
+
+  /* Teal profundo — color institucional / "autoridad" (fondos oscuros) */
+  --c-teal-50:  #e9f4f2;
+  --c-teal-500: #0f877b;   /* marca original */
+  --c-teal-700: #0a5f57;
+  --c-teal-900: #063f39;   /* fondo oscuro premium */
+
+  /* Neutros cálidos (no grises fríos → sensación orgánica) */
+  --c-ink:      #17211f;   /* texto principal */
+  --c-ink-soft: #45514e;   /* texto secundario */
+  --c-muted:    #6b7873;   /* texto terciario / captions */
+  --c-line:     #e4e8e6;   /* bordes / divisores */
+  --c-cream:    #f7f6f1;   /* fondo de sección alterno (cálido) */
+  --c-mist:     #f1f5f3;   /* fondo verde muy sutil */
+  --c-white:    #ffffff;
+
+  /* ---------- SEMÁNTICOS (usar estos en los componentes) ---------- */
+  --color-bg:            var(--c-white);
+  --color-bg-alt:        var(--c-cream);
+  --color-bg-dark:       var(--c-teal-900);
+  --color-surface:       var(--c-white);
+  --color-text:          var(--c-ink);
+  --color-text-soft:     var(--c-ink-soft);
+  --color-text-muted:    var(--c-muted);
+  --color-text-inverse:  var(--c-white);
+  --color-border:        var(--c-line);
+
+  --color-primary:       var(--c-red-500);
+  --color-primary-hover: var(--c-red-600);
+  --color-accent:        var(--c-green-600);
+  --color-accent-hover:  var(--c-green-700);
+  --color-brand-deep:    var(--c-teal-700);
+
+  /* ---------- TIPOGRAFÍA ----------
+     Emparejamos las Adobe Typekit originales con equivalentes
+     Google Fonts (gratuitas, portables a WordPress):
+     - Títulos: "Fraunces" → serif con carácter editorial/autoridad
+       (alternativa geométrica: cambiar a "Archivo" si se prefiere
+        un look más cercano a la "Good Headline" original).
+     - Cuerpo/UI: "Inter" → grotesca limpia, sustituye Franklin Gothic. */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Escala tipográfica fluida (clamp = responsiva sin breakpoints) */
+  --fs-caption: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);   /* 12–13 */
+  --fs-sm:      clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);  /* 14–15 */
+  --fs-base:    clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);       /* 16–17 */
+  --fs-lg:      clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem);     /* 18–20 */
+  --fs-xl:      clamp(1.375rem, 1.2rem + 0.9vw, 1.75rem);      /* 22–28 */
+  --fs-h3:      clamp(1.5rem, 1.25rem + 1.3vw, 2.125rem);      /* 24–34 */
+  --fs-h2:      clamp(2rem, 1.55rem + 2.3vw, 3.25rem);         /* 32–52 */
+  --fs-h1:      clamp(2.75rem, 1.9rem + 4.2vw, 5rem);          /* 44–80 */
+
+  --lh-tight:   1.08;
+  --lh-snug:    1.25;
+  --lh-normal:  1.6;
+
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-black:    900;
+
+  /* Tracking */
+  --ls-tight:  -0.02em;
+  --ls-normal: 0;
+  --ls-wide:   0.08em;   /* eyebrows / labels en mayúsculas */
+
+  /* ---------- ESPACIADO (escala 4px) ---------- */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.5rem;
+  --sp-6:  2rem;
+  --sp-7:  3rem;
+  --sp-8:  4rem;
+  --sp-9:  6rem;
+  --sp-10: 8rem;
+
+  /* Ritmo vertical de secciones (fluido) */
+  --section-y: clamp(3.5rem, 2.5rem + 5vw, 7rem);
+
+  /* ---------- LAYOUT ---------- */
+  --container:      1200px;
+  --container-wide: 1400px;
+  --container-text: 68ch;      /* medida de lectura óptima */
+  --gutter:         clamp(1.25rem, 0.8rem + 2.2vw, 2.5rem);
+
+  /* ---------- RADIOS ---------- */
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-xl:  32px;
+  --radius-pill: 999px;
+
+  /* ---------- SOMBRAS (suaves, tono verde/tierra en vez de negro) ---------- */
+  --shadow-xs: 0 1px 2px rgba(23, 33, 31, 0.06);
+  --shadow-sm: 0 2px 8px rgba(23, 33, 31, 0.06);
+  --shadow-md: 0 8px 24px rgba(23, 33, 31, 0.09);
+  --shadow-lg: 0 18px 48px rgba(23, 33, 31, 0.13);
+  --shadow-red: 0 10px 26px rgba(216, 31, 22, 0.28);
+
+  /* ---------- TRANSICIONES ---------- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast:  160ms;
+  --dur:       300ms;
+  --dur-slow:  600ms;
+
+  /* ---------- Z-INDEX ---------- */
+  --z-header:  100;
+  --z-overlay: 200;
+  --z-modal:   300;
+}
