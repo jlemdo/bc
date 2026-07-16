@@ -11,6 +11,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "node-html-parser": "^9.0.0"
+    "node-html-parser": "^9.0.0",
+    "sharp": "^0.35.3"
   }
 }

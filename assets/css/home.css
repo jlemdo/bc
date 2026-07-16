@@ -152,6 +152,71 @@
 .news-item h4 { font-size: var(--fs-base); font-weight: var(--fw-semibold); }
 .news-item p { font-size: var(--fs-sm); color: var(--color-text-soft); margin-top: 2px; }
 
+/* ---------- PACKSHOTS (fotos de producto sobre fondo blanco) ---------- */
+.packshot {
+  text-align: center;
+  background: var(--c-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5) var(--sp-4) var(--sp-6);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.packshot:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: transparent; }
+.packshot__media {
+  aspect-ratio: 1;
+  display: grid; place-items: center;
+  margin-bottom: var(--sp-4);
+}
+/* contain (no cover): la verdura se muestra completa, recortada sobre el
+   fondo blanco del packshot en vez de rellenar y perder los bordes. */
+.packshot__media img {
+  max-width: 100%; max-height: 100%;
+  width: auto; height: auto; object-fit: contain;
+  transition: transform var(--dur-slow) var(--ease);
+}
+.packshot:hover .packshot__media img { transform: scale(1.05); }
+.packshot__name { font-family: var(--font-display); font-size: var(--fs-xl); }
+.packshot__desc { color: var(--color-text-soft); font-size: var(--fs-sm); margin-top: var(--sp-1); }
+
+/* ---------- NEWSLETTER SIGNUP ---------- */
+.newsletter {
+  background: linear-gradient(120deg, var(--c-teal-700), var(--c-teal-900));
+  border-radius: var(--radius-xl);
+  padding: clamp(2.5rem, 1.5rem + 4vw, 4rem);
+  color: #fff; text-align: center;
+  max-width: 720px; margin-inline: auto;
+}
+.newsletter__content h2 { color: #fff; margin-top: var(--sp-3); }
+.newsletter__content p {
+  color: rgba(255,255,255,0.85); font-size: var(--fs-lg);
+  max-width: 44ch; margin: var(--sp-3) auto var(--sp-6);
+}
+.newsletter .eyebrow { color: var(--c-green-500); }
+.newsletter__form {
+  display: flex; gap: var(--sp-3); flex-wrap: wrap;
+  max-width: 480px; margin-inline: auto;
+}
+.newsletter__form input {
+  flex: 1 1 220px; min-width: 0;
+  padding: 0.9em 1.2em;
+  font-family: var(--font-sans); font-size: var(--fs-base);
+  color: var(--color-text);
+  background: #fff; border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  transition: box-shadow var(--dur) var(--ease);
+}
+.newsletter__form input::placeholder { color: var(--color-text-muted); }
+.newsletter__form input:focus { outline: none; box-shadow: 0 0 0 3px rgba(96,187,70,0.5); }
+.newsletter__form .btn { flex-shrink: 0; }
+.newsletter__note {
+  font-size: var(--fs-caption); color: rgba(255,255,255,0.65);
+  margin-top: var(--sp-4);
+}
+@media (max-width: 480px) {
+  .newsletter__form { flex-direction: column; }
+  .newsletter__form .btn { width: 100%; }
+}
+
 /* ---------- Ajustes móvil (≤ 480px) ---------- */
 @media (max-width: 480px) {
   .hero h1 {
