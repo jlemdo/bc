@@ -100,20 +100,12 @@ p { text-wrap: pretty; }
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: var(--sp-2);
   font-family: var(--font-sans);
   font-size: var(--fs-caption);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-wide);
   text-transform: uppercase;
   color: var(--color-accent);
-}
-.eyebrow::before {
-  content: "";
-  width: 24px;
-  height: 2px;
-  background: currentColor;
-  border-radius: 2px;
 }
 .section--dark .eyebrow { color: var(--c-green-500); }
 

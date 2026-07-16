@@ -56,6 +56,10 @@
   --color-accent:        var(--c-green-600);
   --color-accent-hover:  var(--c-green-700);
   --color-brand-deep:    var(--c-teal-700);
+  /* Gris cálido de marca (mismo tinte verde-tierra que el texto) para
+     CTAs secundarios que deben integrarse sin resaltar */
+  --color-muted:         var(--c-ink-soft);   /* #45514e */
+  --color-muted-hover:   var(--c-ink);        /* #17211f */
 
   /* ---------- TIPOGRAFÍA ----------
      Emparejamos las Adobe Typekit originales con equivalentes

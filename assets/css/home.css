@@ -59,30 +59,6 @@
 }
 @keyframes float { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-12px) rotate(2deg); } }
 
-/* ---------- MARQUEE de productos ---------- */
-.marquee { border-block: 1px solid var(--color-border); background: var(--color-bg); padding-block: var(--sp-4); overflow: hidden; }
-.marquee__track {
-  display: flex; width: max-content; flex-wrap: nowrap;
-  animation: scroll-x 32s linear infinite;
-}
-.marquee:hover .marquee__track { animation-play-state: paused; }
-/* El espaciado va como padding-inline en cada item (no como gap del track),
-   así el patrón es perfectamente uniforme y el bucle no muestra saltos.
-   El track contiene 2 copias idénticas → translateX(-50%) reinicia sin cortes. */
-.marquee__item {
-  display: inline-flex; align-items: center; gap: var(--sp-3);
-  padding-inline: calc(var(--sp-7) / 2);
-  font-family: var(--font-display); font-size: var(--fs-lg);
-  font-weight: var(--fw-semibold); color: var(--color-text-soft);
-  white-space: nowrap;
-}
-.marquee__item span { color: var(--color-accent); }
-@keyframes scroll-x {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-@media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; flex-wrap: wrap; } }
-
 /* ---------- STATS band ---------- */
 .stats-band .grid { gap: var(--sp-6); }
 .stats-band .stat { text-align: center; padding: var(--sp-5) var(--sp-3); }
@@ -179,12 +155,15 @@
 .packshot__desc { color: var(--color-text-soft); font-size: var(--fs-sm); margin-top: var(--sp-1); }
 
 /* ---------- NEWSLETTER SIGNUP ---------- */
+/* Sección de un solo color, de borde a borde y compacta (más angosta de
+   arriba abajo). El verde plano ocupa toda la franja, sin cajita flotante. */
+.section--newsletter {
+  background: var(--c-teal-700);
+  padding-block: clamp(2.5rem, 1.8rem + 2.6vw, 3.75rem);
+}
 .newsletter {
-  background: linear-gradient(120deg, var(--c-teal-700), var(--c-teal-900));
-  border-radius: var(--radius-xl);
-  padding: clamp(2.5rem, 1.5rem + 4vw, 4rem);
   color: #fff; text-align: center;
-  max-width: 720px; margin-inline: auto;
+  max-width: 600px; margin-inline: auto;
 }
 .newsletter__content h2 { color: #fff; margin-top: var(--sp-3); }
 .newsletter__content p {
@@ -214,6 +193,13 @@
 }
 @media (max-width: 480px) {
   .newsletter__form { flex-direction: column; }
+  /* En columna el input NO debe estirarse en alto (flex-grow lo hacía crecer y,
+     con el radius pill, se deformaba como óvalo). Lo dejamos de alto natural,
+     ancho completo y con radio normal. */
+  .newsletter__form input {
+    flex: 0 0 auto; width: 100%;
+    border-radius: var(--radius-md);
+  }
   .newsletter__form .btn { width: 100%; }
 }
 

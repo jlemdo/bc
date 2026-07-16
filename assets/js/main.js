@@ -11,22 +11,46 @@
   const nav = document.querySelector("[data-nav]");
   const toggle = document.querySelector("[data-nav-toggle]");
 
+  // Guardamos la posición de scroll para restaurarla al cerrar. Bloqueamos el
+  // scroll fijando el body (no solo overflow:hidden) para que el header, al
+  // pasar a position:fixed, no provoque un "salto" de la página.
+  let savedScrollY = 0;
+
+  const lockScroll = function () {
+    savedScrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = "-" + savedScrollY + "px";
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+  };
+
+  const unlockScroll = function () {
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    window.scrollTo(0, savedScrollY);
+  };
+
   const closeMenu = function () {
     if (!nav) return;
+    if (!nav.classList.contains("is-open")) return;
     nav.classList.remove("is-open");
     if (toggle) toggle.setAttribute("aria-expanded", "false");
     if (header) header.classList.remove("nav-open");
-    document.body.style.overflow = "";
+    unlockScroll();
   };
 
   if (nav && toggle) {
     toggle.addEventListener("click", function () {
       const open = nav.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", String(open));
-      document.body.style.overflow = open ? "hidden" : "";
       // Eleva el header por encima de todo el contenido mientras el menú
       // está abierto (evita problemas de stacking context).
       if (header) header.classList.toggle("nav-open", open);
+      if (open) lockScroll(); else unlockScroll();
     });
     // Cerrar al hacer click en un enlace del menú
     nav.querySelectorAll(".nav__menu a").forEach(function (a) {
