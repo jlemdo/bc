@@ -38,6 +38,10 @@
 .btn--muted { --_bg: var(--color-muted); box-shadow: var(--shadow-sm); }
 .btn--muted:hover { --_bg: var(--color-muted-hover); box-shadow: var(--shadow-md); }
 
+/* Teal profundo de marca — Member Login (mismo tono que la banda "One of BC") */
+.btn--brand { --_bg: var(--color-brand); box-shadow: var(--shadow-sm); }
+.btn--brand:hover { --_bg: var(--color-brand-hover); box-shadow: var(--shadow-md); }
+
 .btn--ghost {
   --_bg: transparent; --_fg: var(--color-text);
   border-color: var(--color-border);

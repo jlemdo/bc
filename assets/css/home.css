@@ -156,9 +156,9 @@
 
 /* ---------- NEWSLETTER SIGNUP ---------- */
 /* Sección de un solo color, de borde a borde y compacta (más angosta de
-   arriba abajo). El verde plano ocupa toda la franja, sin cajita flotante. */
+   arriba abajo). Mismo teal profundo que la banda "One of BC" para unificar. */
 .section--newsletter {
-  background: var(--c-teal-700);
+  background: var(--color-bg-dark);
   padding-block: clamp(2.5rem, 1.8rem + 2.6vw, 3.75rem);
 }
 .newsletter {

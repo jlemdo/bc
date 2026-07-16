@@ -57,9 +57,14 @@
   --color-accent-hover:  var(--c-green-700);
   --color-brand-deep:    var(--c-teal-700);
   /* Gris cálido de marca (mismo tinte verde-tierra que el texto) para
-     CTAs secundarios que deben integrarse sin resaltar */
-  --color-muted:         var(--c-ink-soft);   /* #45514e */
-  --color-muted-hover:   var(--c-ink);        /* #17211f */
+     CTAs secundarios que deben integrarse sin resaltar.
+     Un paso más claro que el texto para que no se sienta tan pesado. */
+  --color-muted:         #5b6863;
+  --color-muted-hover:   var(--c-ink-soft);   /* #45514e */
+  /* Teal profundo de marca (color de la banda "One of BC") para el botón
+     Member Login, que ahora comparte ese tono con la sección de stats. */
+  --color-brand:         var(--c-teal-900);   /* #063f39 */
+  --color-brand-hover:   var(--c-teal-700);   /* #0a5f57 */
 
   /* ---------- TIPOGRAFÍA ----------
      Emparejamos las Adobe Typekit originales con equivalentes
